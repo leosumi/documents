@@ -18,6 +18,9 @@ LDLIBS =
 SRC_DIR = src
 BUILD_DIR = build
 
+# makedepend
+DEPENDENCIES_FILE = $(BUILD_DIR)/dependencies
+
 # extra warnings
 WEXTRA = yes
 WSTYLE = yes
@@ -78,14 +81,15 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 .PHONY: clean distclean
 
 clean:
-	@rm -rf $(OBJ) $(wildcard *.bak)
+	@rm -rf $(BUILD_DIR)/*
 
 distclean: clean
 	@rm -rf $(EXEC)
 
 directory:
 	@mkdir -p $(BUILD_DIR) $(SRC_DIR)
+	@touch $(DEPENDENCIES_FILE)
 
 depend:
-	@makedepend $(SRC)
+	@makedepend -f $(DEPENDENCIES_FILE) $(SRC)
 
