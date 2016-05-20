@@ -64,7 +64,7 @@ else ifeq ($(MODE), release)
 	CFLAGS = -O2 -s
 	LDFLAGS =
 endif
-CFLAGS += -std=c++11
+CFLAGS += -std=c++14
 
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC))
