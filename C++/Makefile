@@ -13,6 +13,11 @@ MODE = debug
 CC = g++
 EXEC = app
 
+# files extension
+SOURCE_FILE_EXTENSION = .cpp
+HEADER_FILE_EXTENSION = .hpp
+OBJECT_FILE_EXTENSION = .o
+
 # language standard
 STD = c++14
 
@@ -71,8 +76,8 @@ else ifeq ($(MODE), release)
 endif
 CFLAGS += -std=$(STD)
 
-SRC = $(wildcard $(SRC_DIR)/*.cpp)
-OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC))
+SRC = $(wildcard $(SRC_DIR)/*$(SOURCE_FILE_EXTENSION))
+OBJ = $(patsubst $(SRC_DIR)/%$(SOURCE_FILE_EXTENSION), $(BUILD_DIR)/%$(OBJECT_FILE_EXTENSION), $(SRC))
 
 all: directory depend $(EXEC)
 	$(info Compiled in $(MODE) mode)
@@ -80,7 +85,7 @@ all: directory depend $(EXEC)
 $(EXEC): $(OBJ)
 	@$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(BUILD_DIR)/%$(OBJECT_FILE_EXTENSION): $(SRC_DIR)/%$(SOURCE_FILE_EXTENSION)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: clean distclean
