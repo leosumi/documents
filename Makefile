@@ -13,8 +13,13 @@ MODE = debug
 CC = g++
 EXEC = app
 
+# language standard
+STD = c++14
+
+# libraries
 LDLIBS =
 
+# directories
 SRC_DIR = src
 BUILD_DIR = build
 
@@ -64,7 +69,7 @@ else ifeq ($(MODE), release)
 	CFLAGS = -O2 -s
 	LDFLAGS =
 endif
-CFLAGS += -std=c++14
+CFLAGS += -std=$(STD)
 
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC))
