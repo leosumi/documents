@@ -22,6 +22,7 @@ OBJECT_FILE_EXTENSION = .o
 STD = c11
 
 # libraries
+CFLAGS =
 LDLIBS =
 
 # directories
@@ -42,7 +43,7 @@ WERROR = no
 WFATALERRORS = no
 
 ifeq ($(MODE), debug)
-	CFLAGS = -pedantic -Wall -Wextra -g
+	CFLAGS += -pedantic -Wall -Wextra -g
 	LDFLAGS =
 
 	ifeq ($(WEXTRA), yes)
@@ -66,7 +67,7 @@ ifeq ($(MODE), debug)
 	endif
 
 else ifeq ($(MODE), release)
-	CFLAGS = -O2 -s
+	CFLAGS += -O2 -s
 	LDFLAGS =
 endif
 CFLAGS += -std=$(STD)
